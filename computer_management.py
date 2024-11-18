@@ -82,7 +82,7 @@ while True:
         print("\nExiting", end="")
         for i in range(3):
             time.sleep(1)
-            print(".", end="", flush=True) #ingen aning om vad det här betyder
+            print(".", end="", flush=True)
         time.sleep(2)
         break
         
