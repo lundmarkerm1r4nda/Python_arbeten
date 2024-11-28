@@ -3,7 +3,7 @@
 import random
 import time
 
-#problem - the money is not being saved, will always have 100 money in at the start.
+
 money = 100
 randomnames = ('Bengt' , 'Peter' , 'Agatha')
 
