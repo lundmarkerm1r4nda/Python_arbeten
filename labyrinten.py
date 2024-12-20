@@ -97,7 +97,7 @@ def sunny_room():
                 -------------  
                 """)
         else:
-            print("\nGoblin chose påse, you won!")
+            print("\nGoblin chose Påse, you won!")
             time.sleep(0.5)
             print("And as promised, the goblin opens a door infront of you that you had not noticed.")
             long_corridor()
