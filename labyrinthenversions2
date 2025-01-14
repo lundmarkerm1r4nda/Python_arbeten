@@ -1,0 +1,227 @@
+import time
+
+inventory_lista = []
+
+def house_layout():
+    text_house_layout = '''     
+                    ___________________________
+    ________________│           │              │
+    │_│_│_│_│_│_│  │  ▯        ˂               │
+    │____________  │  ▯     ▯  │              │
+    │             ˅│  ▯     ▯  │______________│
+    │              │  ▯     ▯  │
+    │_____   ______│____    
+        │  ˅             ˅   │     ␤
+        │       ❘____❘        │_____
+        │                    │     │
+        │____           _____│_____│
+            │            │
+            │  Entrance  │
+            │____________│
+                   ⬆'''
+    print(text_house_layout)
+
+def back_at_entrance_decision(): #Entrance function after key have been picked up
+                        time.sleep(1.5)
+                        print("\nYou are back at the entrance.")
+                        try:
+                            question1 = int(input("\n1) Open the door in front of you.\n2) Wait a little.\n"))
+                        except ValueError:
+                            print("\nPlease enter a valid number.")
+                            back_at_entrance_decision()
+                        if question1 == 1:
+                            print("\nYou open the door in front of you..")
+                            livingroom()
+                        elif question1 == 2:
+                            print("\nYou have decided to stay for a while")
+                
+                            for i in range(3):
+                                time.sleep(1)
+                                print(".", end="", flush=True) 
+                            time.sleep(2)
+                            print()
+                            back_at_entrance_decision()
+                        else:
+                            print("\nPlease enter 1 or 2")
+                            back_at_entrance_decision()
+def rusty_key_decision():
+                try:
+                    pick_up_key_question = int(input("\n1) Take the key \n2) Let it be\n"))           
+                except ValueError:
+                    print ("\nPlease enter a valid number")
+                    rusty_key_decision()
+                if pick_up_key_question == 1:
+                    print ("\nYou take the key and put it in your pocket.")
+                    time.sleep(1)
+                    print ("\n    ˃ Item added to inventory! ˂")
+                    inventory_lista.append("Rusty Key")
+                    time.sleep(1.5)
+                    print (f"\nInventory: {inventory_lista}")
+                    print ("\nYou walk back to the entrance")
+
+                    back_at_entrance_decision()
+                elif pick_up_key_question == 2:
+                    print("You decide to let the key hang where it is.")
+                    print ("\nYou walk back to the entrance")
+                    back_at_entrance_decision()
+                else:
+                    print("\nPlease enter 1 or 2")
+                    rusty_key_decision()
+def entrance_decision():
+        try:
+            answer = int(input("\n1) Open the door in front of you.\n2) Turn around and try exit the bulding.\n3) Wait a little.\n"))
+        except ValueError:
+            print("\nPlease enter a number.")
+            time.sleep(1)
+            entrance_decision()
+        
+        if answer == 1:
+            print("\nYou approach the door ahead and open it.\n")
+            time.sleep(2)
+
+            livingroom()
+        elif answer == 2:
+            print("\nYou turn around and tug at the doorknob, but the door does not budge even the slightest...")
+            print("You look around you and see a rusty key hanging on the clothes hanger to your left")
+            
+            rusty_key_decision()
+
+        elif answer == 3:
+            print("you have decided to stay for a while")
+                
+            for i in range(3):
+                time.sleep(1)
+                print(".", end="", flush=True) 
+            time.sleep(2)
+            print()
+            entrance()
+        else:
+            print("\nPlease enter 1, 2 or 3.")
+            entrance_decision()
+def livingroom_door_choice():
+    try:
+        time.sleep(1)
+        print("Enter the...")
+        time.sleep(0.5)
+        print("1) Door to your left.")
+        time.sleep(0.5)
+        print("2) Door straight ahead")
+        time.sleep(0.5)
+        print("3) Door to your right")
+        time.sleep(0.5)        
+        print("4) Go back to the entrance")
+        time.sleep(1)
+        print("\nOR")
+        print("5) Show inventory")
+        if "Map" in inventory_lista:
+            print("6) Look at the map")
+        time.sleep(1) 
+        question1 = int(input("\nYour choice: "))
+    except ValueError:
+        print("Please enter a valid number.")
+        livingroom_door_choice()
+    if question1 == 1:
+         print("YOu are a rat")
+    elif question1 == 2:
+         print("Your mom")
+    elif question1 == 3:
+         print("Ahead you see a door with a keyhole on it.")
+         try_keyhole()
+    elif question1 == 4:
+         if "Rusty Key" in inventory_lista:
+              back_at_entrance_decision()
+         else:
+              entrance()
+    elif question1 == 5:
+        time.sleep(1)
+        print(f"\nInventory: {inventory_lista}\n")
+        time.sleep(1)
+        livingroom_door_choice()
+    elif question1 == 6:
+        if "Map" in inventory_lista:
+              time.sleep(1)
+              print("")
+              house_layout()
+              print("")
+              time.sleep(1)
+              livingroom_door_choice()
+        else:
+         time.sleep(1)
+         print("\nPlease enter 1, 2, 3, 4 or 5")
+         time.sleep(1)
+         livingroom_door_choice()
+            
+    else:
+         time.sleep(1)
+         print("\nPlease enter 1, 2, 3, 4, or 5")
+         time.sleep(1)       
+         livingroom_door_choice()               
+def try_keyhole():
+            if "Rusty Key" in inventory_lista:
+                try:
+                    question2 = input("Do you want to try use the key you found before? Yes/No: ").lower()
+                except ValueError:
+                    print("Please enter a valid answer")
+                    try_keyhole()
+                if question2 == "yes":
+                    time.sleep(1)
+                    print ("\n    ˃ Item removed from inventory ˂")
+                    time.sleep(1)
+                    inventory_lista.remove("Rusty Key")
+                    time.sleep(1)
+                    print(f"Inventory: {inventory_lista}")
+                    time.sleep(1)
+                    hidden_key_room()
+
+                elif question2 == "no":
+                    print("")
+                else:
+                    print("Please enter Yes or No")
+                    try_keyhole()
+            else:
+                time.sleep(2)
+                print("\nYou try the door but quickly realize that its locked.")
+                time.sleep(1)
+                print("\nYou go back")
+                livingroom_door_choice()
+def hidden_key_room(): #room thats available after getting key at entrance
+    time.sleep(1)
+    print ("\nYou walk into the little room")
+    time.sleep(1)
+    print ("\nBefore you on some moldy shelves you see a map")
+    time.sleep(1)
+    def pick_up_map_action ():
+        try:
+            question_pick_up_map = input("Pick up the map? Yes/no: ").lower()
+        except ValueError:
+            print("Please enter a valid answer")
+            pick_up_map_action()
+        if question_pick_up_map == "yes":
+                    print ("\nYou take the map and put it in your pocket.")
+                    time.sleep(1)
+                    print ("\n    ˃ Item added to inventory! ˂")
+                    inventory_lista.append("Map")
+                    time.sleep(1.5)
+                    print (f"\nInventory: {inventory_lista}")
+                    print("\nYou back out into the livingroom")
+                    livingroom_door_choice()
+        elif question_pick_up_map == "no":
+            print ("\nYou leave the map on the shelf and back out into the livingroom.")
+            time.sleep(1.5)
+            livingroom_door_choice()            
+        else:
+            print("\nPlease enter Yes or No\n")
+            pick_up_map_action()
+    pick_up_map_action()     
+def entrance(): #rum 1
+    print("\nYou are at the entrance")
+    print("What do you want to do") 
+    entrance_decision()
+def livingroom (): #rum 2
+    print("You have entered the livingroom")
+    print("\nThere is 1 door way over in the other side of the room to your left, one door slightly open straight ahead, and one door directly to your right\n")
+    time.sleep(3)
+    livingroom_door_choice()
+
+
+entrance()
